@@ -1,6 +1,6 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #1a1919;
+  background-color: #eef0f3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@ body{
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #FAFAFA;
+  background-color: #faffff;
   z-index: 1000; 
   height: 50px;  
   box-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);}
@@ -72,7 +72,7 @@ body{
 .card-container{
   display: flex;
   flex-direction: row;
-  background-color: #FAFAFA;
+  background-color: #faffff;
   height: 200px;
   width: 600px;
   border-radius: 5px;
@@ -92,16 +92,11 @@ body{
 .product-info-name{
   font-weight: bold;
 }
-.product-info-desc{
-  
-}
+
 .product-info-price{
   font-weight: bold;
 }
 
-.product-img-container{
-  
-  }
 .product-more-info-container{
   height: 100%;
   width: 90px;
@@ -115,12 +110,18 @@ border: none;
 border-radius: 8px;
 font-weight: bold;
 background-color: #052dd6;
-color: #fafafa;
+color: #faffff;
 cursor: pointer;
 padding: 8px 16px;
 }
 
 .card-products-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.app-test{
   display: flex;
   flex-direction: column;
   gap: 8px;
