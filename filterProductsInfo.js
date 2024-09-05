@@ -17,7 +17,7 @@ fetchButton.addEventListener('click', () => {
      `
       <div class="product-img-container"><img src="./public/assets/filtro-prueba.jpg" alt="filtro-mfilt" height="180px" width="180px"></div>
 
-      <div class="product-info-container">
+      <div class="product-info-container" >
 
         <span class="product-info-name">
           ${product.productName}
@@ -31,7 +31,7 @@ fetchButton.addEventListener('click', () => {
       </div>
     
       <div class="product-more-info-container">
-        <button class="product-more-info-b">
+        <button class="product-more-info-b" id="redirect">
           Más info
         </button>
       </div>
@@ -40,6 +40,6 @@ fetchButton.addEventListener('click', () => {
 
     
       })
-  
+
 })
 })

@@ -23,9 +23,9 @@ products.forEach(product=> {
       </div>
       
       <div class="product-more-info-container">
-        <button class="product-more-info-b">
+        <button class="product-more-info-b" id="redirect">
           Más info
-        </button>
+        </button>  
       </div>
      `
      cardProductsInfo.appendChild(div)});

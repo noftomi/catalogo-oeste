@@ -9,6 +9,7 @@ async function fetchAndProcessCSV() {
       .slice(1)
       .map(row => {
         const [id, productName, description, price] = row.split(',');
+        console.log("🚀 ~ fetchAndProcessCSV ~ price:", id,productName,price)
         return { id, productName, description, price: Number(price) };
       });
 
