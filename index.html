@@ -1,34 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oeste Autopartes</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <header class="top-bar">
-    <div class="search-container">
-      <input class="search-bar" id="searchInput" placeholder="Busca aquí...">
-      <button class="search-button" id="fetchButton">
-        <img src="./public/assets/search-icon.svg" alt="Buscar" height="16" width="16">
-      </button>
-    </div>
-  </header>
-  
-  <main class="content">
-    <div class="app-test" id="app"></div>
-    <div id="cardProductsInfo" class="card-products-container"></div>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oeste Autopartes</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="top-bar"></header>
+
+    <main class="content">
+      <div class="search-container">
+        <input
+          class="search-bar"
+          id="searchInput"
+          placeholder="Busca aquí..."
+        />
+        <button class="search-button" id="fetchButton">
+          <img
+            src="./public/assets/search-icon.svg"
+            alt="Buscar"
+            height="16"
+            width="16"
+          />
+        </button>
+      </div>
+      <div class="filter-and-product-container">
+        <div class="dropdown">
+          <h3>Por tipo de filtros</h3>
+          <div class="filter-options" id="filterOptions">
+            <label>
+              <input type="checkbox" name="category" value="redondo" />
+              Filtro Redondo
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="panel" />
+              Filtro Panel
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="aceite" />
+              Filtro de Aceite
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="combustible" />
+              Filtro de Combustible
+            </label>
+          </div>
+          <h3>Por marcas</h3>
+          <div class="filter-options" id="filterOptions">
+            <label>
+              <input type="checkbox" name="category" value="fram" />
+              Fram
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="abadel" />
+              Abadel
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="wega" />
+              Wega
+            </label>
+            <label>
+              <input type="checkbox" name="category" value="combustible" />
+              Filtro de Combustible
+            </label>
+          </div>
+        </div>
+        <div id="cardProductsInfo" class="card-products-container"></div>
+      </div>
     </main>
-  
-<script>
-        document.getElementById("redirect").addEventListener("click", function() {
-        window.location.href = "./moreInfoProduct.html";
-    });
-</script>
-<script src="./getProductsInfo.js" defer></script>
-<script src="./cardsProductInformation.js"></script>
-<script src="filterProductsInfo.js"></script>
-</body>
+
+    <script src="./getProductsInfo.js" defer></script>
+    <script src="./searchProductsInfo.js" defer></script>
+    <script src="./cardsProductInformation.js" defer></script>
+
+    <script>
+      let globalProducts = [];
+      // Llamar a la función fetchAndProcessCSV cuando la página cargue
+      window.addEventListener("DOMContentLoaded", async () => {
+        let response = await fetchAndProcessCSV();
+        globalProducts = response;
+
+        console.log("globalProducts", globalProducts);
+
+        // Ahora que los productos están cargados, agregamos el evento de filtro
+        document
+          .querySelectorAll('input[name="category"]')
+          .forEach((checkbox) => {
+            checkbox.addEventListener("change", () => {
+              let selectedValues = Array.from(
+                document.querySelectorAll('input[name="category"]:checked')
+              ).map((checkbox) => checkbox.value);
+
+              console.log("Categorías seleccionadas:", selectedValues);
+
+              if (selectedValues?.length > 0) {
+                // Filtrar los productos según las categorías seleccionadas
+                let filteredData = globalProducts.filter((item) =>
+                  selectedValues.includes(item.type)
+                );
+
+                console.log("🚀 ~ filteredData:", filteredData);
+
+                // Actualizar la interfaz con los productos filtrados
+                renderCardProducts(filteredData);
+
+                // Llamar a la función inputSearchInfo para aplicar la búsqueda
+                inputSearchInfo(filteredData);
+              } else {
+                renderCardProducts(globalProducts);
+                inputSearchInfo(globalProducts);
+              }
+            });
+          });
+
+        // Inicializar la búsqueda global para todos los productos si no hay filtros
+        renderCardProducts(globalProducts);
+        inputSearchInfo(globalProducts);
+      });
+    </script>
+  </body>
 </html>
